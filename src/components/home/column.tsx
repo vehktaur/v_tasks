@@ -9,10 +9,10 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import TaskForm from '../task-form';
-import { useDroppable } from '@dnd-kit/core';
 import { Column as ColumnType } from '@/lib/types';
 import { Task } from '@/lib/schemas';
 import TaskCard from '../task-card';
+import { Droppable } from '@hello-pangea/dnd';
 
 interface ColumnProps {
   column: ColumnType;
@@ -20,10 +20,6 @@ interface ColumnProps {
 }
 
 const Column = ({ column, tasks }: ColumnProps) => {
-  const { setNodeRef } = useDroppable({
-    id: column.id,
-  });
-
   return (
     <section className='min-h-36 w-full max-w-[22rem] overflow-visible rounded-lg bg-[#F5F7F9] pb-5 shadow-sm'>
       {/* Header */}
@@ -48,13 +44,21 @@ const Column = ({ column, tasks }: ColumnProps) => {
       </header>
 
       {/* Column Content */}
-      <div
-        ref={setNodeRef}
-        className='text-staleblue mt-2 flex flex-col gap-4 px-2 text-sm'
-      >
-        {tasks?.map((task) => <TaskCard key={task.id} task={task} />)}
-        {!tasks?.length && <p className='italic'>{column.placeholder}</p>}
-      </div>
+      <Droppable droppableId={column.id}>
+        {(provider) => (
+          <div
+            ref={provider.innerRef}
+            {...provider.droppableProps}
+            className='text-staleblue mt-2 flex flex-col gap-4 px-2 text-sm'
+          >
+            {tasks?.map((task, index) => (
+              <TaskCard key={task.id} task={task} index={index} />
+            ))}
+            {!tasks?.length && <p className='italic'>{column.placeholder}</p>}
+            {provider.placeholder}
+          </div>
+        )}
+      </Droppable>
     </section>
   );
 };
