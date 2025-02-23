@@ -150,8 +150,10 @@
   .padding-inline {
     @apply ~px-5/8;
   }
+}
 
-  .section-heading {
-    @apply ~text-3xl/5xl ~mb-4/5 ~leading-[3rem]/[4.8rem] font-semibold capitalize text-white;
+@layer components {
+  .input {
+    @apply ~py-1.5/[0.62rem] ~px-3/[0.88rem] ~text-sm/base border-ash-50 rounded-xl border outline-none focus-visible:border-[#333];
   }
 }

@@ -7,8 +7,10 @@ export const TodoSchema = z.object({
   priority: z.enum(['high', 'medium', 'low'], {
     errorMap: () => ({ message: 'Priority must be high, medium, or low' }),
   }),
-  uploadCover: z.instanceof(File).optional(),
+  image: z.union([z.string().url(), z.instanceof(File)]).optional(),
   deadline: z.string().optional(),
   time: z.string().optional(),
-  completed: z.boolean(),
+  status: z.enum(['pending', 'in progress', 'completed']).default('pending'),
 });
+
+export type Todo = z.infer<typeof TodoSchema>;

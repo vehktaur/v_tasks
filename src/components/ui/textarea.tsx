@@ -3,12 +3,12 @@
 import { cn } from '@/lib/utils';
 import { useFormContext } from 'react-hook-form';
 
-interface InputProps extends React.ComponentProps<'input'> {
-  label?: string;
+interface TextareaProps extends React.ComponentProps<'textarea'> {
+  label?: string | React.ReactNode;
   name: string;
 }
 
-const Input = ({ className, type, label, name, ...props }: InputProps) => {
+const Textarea = ({ className, label, name, ...props }: TextareaProps) => {
   const {
     register,
     formState: { errors },
@@ -21,10 +21,9 @@ const Input = ({ className, type, label, name, ...props }: InputProps) => {
           {label}
         </label>
       )}
-      <input
+      <textarea
         aria-labelledby={`${name}-error`}
         id={name}
-        type={type}
         className={cn(
           'input flex w-full bg-transparent transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground focus-visible:border-[#333] focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
           className,
@@ -47,4 +46,4 @@ const Input = ({ className, type, label, name, ...props }: InputProps) => {
   );
 };
 
-export default Input;
+export default Textarea;

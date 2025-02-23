@@ -1,18 +1,14 @@
-import { Calendar, Home, Inbox, Search, Settings } from 'lucide-react';
-
 import {
   Sidebar,
   SidebarContent,
   SidebarHeader,
   SidebarMenu,
-  SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import Image from 'next/image';
 import images from '@/assets/images';
-import Link from 'next/link';
-import { CalendarIcon } from '@/assets/svgs';
-import NavLink from '../ui/nav-link';
+import { IoCalendarOutline as CalendarIcon } from 'react-icons/io5';
+import NavLink from '@/components/ui/nav-link';
 import { cn } from '@/lib/utils';
 import sfPro from '../../../public/fonts/sf-pro';
 
@@ -42,12 +38,12 @@ export function AppSidebar() {
               <NavLink
                 className={cn(
                   sfPro.className,
-                  '~text-sm/lg text-ash ~px-3/5 ~py-3/5 hover:text-indigo hover:bg-purple-mist flex items-center gap-5 font-semibold uppercase transition-all duration-300',
+                  '~text-sm/lg text-ash-200 ~px-3/5 ~py-3/5 hover:text-indigo hover:bg-purple-mist flex items-center gap-5 rounded-r-md font-semibold uppercase transition-all duration-300',
                 )}
                 activeClassName='border-indigo bg-purple-mist text-indigo border-r-[6px] '
                 href={item.href}
               >
-                <item.icon />
+                <item.icon className='~size-4/6' />
                 <span>{item.title}</span>
               </NavLink>
             </SidebarMenuItem>

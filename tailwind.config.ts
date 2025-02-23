@@ -18,6 +18,10 @@ export default {
     fontSize,
     screens,
     extend: {
+      boxShadow: {
+        xs: '0px 3px 2px -2px rgba(0, 0, 0, 0.06), 0px 5px 3px -2px rgba(0, 0, 0, 0.02)',
+        sm: '0px 2px 5px 0px rgba(60, 66, 87, 0.04), 0px 0px 0px 1px rgba(60, 66, 87, 0.08), 0px 1px 1px 0px rgba(0, 0, 0, 0.06)',
+      },
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
@@ -69,8 +73,12 @@ export default {
           border: 'hsl(var(--sidebar-border))',
           ring: 'hsl(var(--sidebar-ring))',
         },
-        char: '#65676D',
-        ash: '#65676D',
+        char: '#1A1919',
+        ash: {
+          50: '#D0D5DD',
+          100: '#848585 ',
+          200: '#65676D',
+        },
         staleblue: '#252C32',
         indigo: '#4F35F3',
         'purple-mist': '#F5F3FF',

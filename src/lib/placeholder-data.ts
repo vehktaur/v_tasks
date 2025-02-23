@@ -1,0 +1,58 @@
+import { Todo } from './schemas';
+
+export const todos: Todo[] = [
+  {
+    id: '1',
+    name: 'Write a blog post',
+    description: 'Outline the top 10 productivity tips for professionals.',
+    priority: 'high',
+    deadline: '2024-08-26',
+    time: '14:00',
+    status: 'pending',
+  },
+  {
+    id: '2',
+    name: 'Watch a Frontend Tutorial',
+    description: 'Complete the React performance optimization module.',
+    priority: 'medium',
+    deadline: '2024-08-27',
+    time: '16:30',
+    status: 'pending',
+  },
+  {
+    id: '3',
+    name: 'Organize a charity event',
+    description: 'Plan a community outreach event for underprivileged kids.',
+    priority: 'low',
+    deadline: '2024-09-05',
+    time: '10:00',
+    status: 'completed',
+  },
+  {
+    id: '4',
+    name: 'Improve cards readability',
+    description: 'Refactor the UI to enhance card legibility and spacing.',
+    priority: 'high',
+    deadline: '2024-08-30',
+    time: '12:00',
+    status: 'completed',
+  },
+  {
+    id: '5',
+    name: 'Improve cards readability',
+    description: 'Refactor the UI to enhance card legibility and spacing.',
+    priority: 'high',
+    deadline: '2024-08-30',
+    time: '12:00',
+    status: 'completed',
+  },
+  {
+    id: '6',
+    name: 'Improve cards readability',
+    description: 'Refactor the UI to enhance card legibility and spacing.',
+    priority: 'high',
+    deadline: '2024-08-30',
+    time: '12:00',
+    status: 'completed',
+  },
+];

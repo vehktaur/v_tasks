@@ -1,9 +1,9 @@
-import ColumnWrapper from './layout/column-wrapper';
+import ColumnWrapper from '@/components/layout/column-wrapper';
 
 const CompletedColumn = () => {
   return (
     <ColumnWrapper title='Completed'>
-      No completed tasks yet. Keep going!
+      {true && <p className='italic'> No completed tasks yet. Keep going!</p>}
     </ColumnWrapper>
   );
 };
