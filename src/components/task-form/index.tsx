@@ -1,6 +1,6 @@
 'use client';
 
-import { Todo, TodoSchema } from '@/lib/schemas';
+import { Task, TaskSchema } from '@/lib/schemas';
 import { DialogClose } from '@/components/ui/dialog';
 import Input from '@/components/ui/input';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -15,18 +15,18 @@ import { timeOptions } from '@/lib/data';
 import { Button } from '../ui/button';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-const TodoForm = ({ todo }: { todo?: Todo }) => {
+const TaskForm = ({ task }: { task?: Task }) => {
   const methods = useForm({
     defaultValues: {
-      name: todo?.name ?? '',
-      description: todo?.description ?? '',
-      priority: todo?.priority,
-      image: todo?.image ?? '',
-      deadline: todo?.deadline ?? '',
-      time: todo?.time ?? '',
-      status: todo?.status ?? 'pending',
+      name: task?.name ?? '',
+      description: task?.description ?? '',
+      priority: task?.priority,
+      image: task?.image ?? '',
+      deadline: task?.deadline ?? '',
+      time: task?.time ?? '',
+      status: task?.status ?? 'pending',
     },
-    resolver: zodResolver(TodoSchema),
+    resolver: zodResolver(TaskSchema),
   });
 
   const { handleSubmit } = methods;
@@ -38,7 +38,7 @@ const TodoForm = ({ todo }: { todo?: Todo }) => {
     <>
       <div className='mb-5 flex items-center justify-between'>
         <h2 className={cn(sfPro.className, '~text-lg/2xl font-semibold')}>
-          {todo?.id ? 'Edit' : 'Add'} Task
+          {task?.id ? 'Edit' : 'Add'} Task
         </h2>
         <DialogClose />
       </div>
@@ -47,7 +47,7 @@ const TodoForm = ({ todo }: { todo?: Todo }) => {
         <form onSubmit={onSubmit}>
           <div className='space-y-4'>
             <Input
-              label='Todo Name'
+              label='task Name'
               name='name'
               placeholder='Enter task name'
             />
@@ -95,10 +95,10 @@ const TodoForm = ({ todo }: { todo?: Todo }) => {
             </div>
           </div>
 
-          <Button className='mt-6 w-full rounded-xl'>{todo?.id ? 'Update' : 'Add'}</Button>
+          <Button className='mt-6 w-full rounded-xl'>{task?.id ? 'Update' : 'Add'}</Button>
         </form>
       </FormProvider>
     </>
   );
 };
-export default TodoForm;
+export default TaskForm;

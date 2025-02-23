@@ -15,7 +15,7 @@ const Header = () => {
         )}
       >
         <SidebarTrigger />
-        <h2 className='~text-base/3xl flex-shrink-0'>
+        <h2 className='~text-base/2xl flex-shrink-0'>
           <Today />
         </h2>
       </div>

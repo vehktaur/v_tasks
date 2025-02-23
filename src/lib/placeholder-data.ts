@@ -1,6 +1,6 @@
-import { Todo } from './schemas';
+import { Task } from './schemas';
 
-export const todos: Todo[] = [
+export const tasks: Task[] = [
   {
     id: '1',
     name: 'Write a blog post',

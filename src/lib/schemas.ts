@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const TodoSchema = z.object({
+export const TaskSchema = z.object({
   id: z.string(),
   name: z.string().min(1, 'Task name is required'),
   description: z.string().optional(),
@@ -13,4 +13,4 @@ export const TodoSchema = z.object({
   status: z.enum(['pending', 'in progress', 'completed']).default('pending'),
 });
 
-export type Todo = z.infer<typeof TodoSchema>;
+export type Task = z.infer<typeof TaskSchema>;
