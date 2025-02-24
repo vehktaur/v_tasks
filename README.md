@@ -64,14 +64,14 @@ Make sure you have the following installed:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/vehktaur/techinnover.git
+   git clone https://github.com/vehktaur/v_tasks.git
 
    ```
 
 2. Navigate into the project directory:
 
    ```bash
-   cd techinnover
+   cd v_tasks
 
    ```
 

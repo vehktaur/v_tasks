@@ -1,5 +1,4 @@
-import logo from './logo.png';
 
-const images = { logo };
+const images = {  };
 
 export default images;

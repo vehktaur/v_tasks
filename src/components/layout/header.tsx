@@ -26,9 +26,9 @@ const Header = () => {
       </div>
       {/* Right section: Search bar */}
       <Suspense>
-        <Search className='ml-auto' />'
+        <Search className='ml-auto' />
       </Suspense>
-      '
+      
     </header>
   );
 };

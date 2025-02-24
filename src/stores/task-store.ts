@@ -31,6 +31,6 @@ export const useTaskStore = create<TaskStore>()(
         toast.success('Task Deleted');
       },
     }),
-    { name: 'techinnover-tasks', skipHydration: true },
+    { name: 'v_tasks', skipHydration: true },
   ),
 );

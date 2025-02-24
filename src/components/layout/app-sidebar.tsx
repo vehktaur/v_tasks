@@ -6,13 +6,12 @@ import {
   SidebarMenu,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import Image from 'next/image';
-import images from '@/assets/images';
 import { IoCalendarOutline as CalendarIcon } from 'react-icons/io5';
 import NavLink from '@/components/ui/nav-link';
 import { cn } from '@/lib/utils';
 import sfPro from '../../../public/fonts/sf-pro';
 import { SettingsIcon } from 'lucide-react';
+import { Logo } from '@/assets/svgs';
 
 // Define the sidebar menu items with titles, routes, and icons.
 const menuItems = [
@@ -34,11 +33,7 @@ export function AppSidebar() {
     <Sidebar>
       {/* Sidebar header containing the logo */}
       <SidebarHeader className='~px-5/8 ~pt-6/10 ~pb-5/8'>
-        <Image
-          className='mx-auto max-w-[10.9rem]'
-          src={images.logo}
-          alt='Techinnover'
-        />
+      <Logo className='w-full object-contain ~max-w-28/40' />
       </SidebarHeader>
 
       {/* Sidebar content with a menu of navigation links */}

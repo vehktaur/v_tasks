@@ -14,7 +14,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Techinnover',
+  title: 'v_tasks | Tasks Manager',
   description: 'A Feature Packed Task Management Application',
 };
 
