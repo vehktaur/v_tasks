@@ -1,7 +1,6 @@
 'use client';
 
 import { UploadCloudIcon } from '@/assets/svgs';
-import { cn } from '@/lib/utils';
 import { useFormContext } from 'react-hook-form';
 
 interface CoverUploadProps extends React.ComponentProps<'input'> {

@@ -2,7 +2,7 @@ import { nanoid } from 'nanoid';
 import { z } from 'zod';
 
 export const TaskSchema = z.object({
-  id: z.string().default(() => nanoid()),
+  id: z.string(),
   name: z.string().min(1, 'Task name is required'),
   description: z.string().optional(),
   priority: z.enum(['high', 'medium', 'low'], {
