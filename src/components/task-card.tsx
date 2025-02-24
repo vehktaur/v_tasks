@@ -11,13 +11,16 @@ import FormDialog from './form-dialog';
 import Image from 'next/image';
 
 const TaskCard = ({ task, index }: { task: Task; index: number }) => {
+  // Get the deleteTask action from the task store.
   const deleteTask = useTaskStore((state) => state.deleteTask);
 
+  // Handler to delete a task using its id.
   const handleDelete = (id: string | number) => {
     deleteTask(id);
   };
 
   return (
+    // Wrap the task card in a Draggable component for drag-and-drop functionality.
     <Draggable index={index} draggableId={task.id}>
       {(provider) => (
         <article
@@ -25,10 +28,10 @@ const TaskCard = ({ task, index }: { task: Task; index: number }) => {
           {...provider.dragHandleProps}
           {...provider.draggableProps}
           className={cn(
-            'shadow-xs relative z-20 flex flex-col rounded-md bg-white p-4',
+            'relative z-20 flex flex-col rounded-md bg-white p-4 shadow-xs',
           )}
         >
-          {/* Priority badge */}
+          {/* Priority Badge */}
           <div
             className={cn(
               'mb-4 w-fit rounded px-2 py-1 text-xs font-medium uppercase',
@@ -42,24 +45,26 @@ const TaskCard = ({ task, index }: { task: Task; index: number }) => {
             {task.priority}
           </div>
 
-          {/* Task name and options button */}
+          {/* Header: Task name and options menu */}
           <div className='mb-2 flex items-center'>
             <h3 className='w-full truncate text-base font-medium'>
               {task.name}
             </h3>
+            {/* Options Popover */}
             <Popover>
-              <PopoverTrigger className='shadow-xs relative z-50 grid size-6 flex-shrink-0 cursor-default place-items-center rounded-md border border-[#DDD]'>
+              <PopoverTrigger className='relative z-50 grid size-6 flex-shrink-0 cursor-default place-items-center rounded-md border border-[#DDD] shadow-xs'>
                 <MoreHorizontalIcon className='size-4' />
               </PopoverTrigger>
               <PopoverContent
                 className='grid w-auto px-0 py-1 text-xs *:px-4 *:py-1 *:text-left'
                 align='end'
               >
+                {/* Edit Button wrapped inside a FormDialog */}
                 <FormDialog
                   trigger={
                     <button
                       disabled={task.status === 'completed'}
-                      className='text-staleblue inline-block w-full text-left outline-none transition-colors duration-300 hover:bg-zinc-100 disabled:cursor-not-allowed disabled:hover:bg-white'
+                      className='inline-block w-full text-left text-staleblue outline-none transition-colors duration-300 hover:bg-zinc-100 disabled:cursor-not-allowed disabled:hover:bg-white'
                     >
                       Edit
                     </button>
@@ -67,6 +72,7 @@ const TaskCard = ({ task, index }: { task: Task; index: number }) => {
                   task={task}
                 />
 
+                {/* Delete Button */}
                 <button
                   onClick={() => handleDelete(task.id)}
                   className='text-[#E60C02] outline-none transition-colors duration-300 hover:bg-zinc-100'
@@ -77,11 +83,12 @@ const TaskCard = ({ task, index }: { task: Task; index: number }) => {
             </Popover>
           </div>
 
+          {/* Task Cover Image */}
           {task.image && task.image.url && (
-            <div className='max-h-[7.8rem] mb-4 overflow-hidden rounded'>
+            <div className='mb-4 max-h-[7.8rem] overflow-hidden rounded'>
               <Image
                 className='size-full object-cover'
-                src={task.image.url!}
+                src={task.image.url}
                 alt={task.image.name ?? 'An image has no name'}
                 width={1280}
                 height={720}
@@ -89,15 +96,15 @@ const TaskCard = ({ task, index }: { task: Task; index: number }) => {
             </div>
           )}
 
-          {/* Task description */}
+          {/* Task Description */}
           {task.description && (
-            <p className='text-staleblue ~text-xs/sm line-clamp-6'>
+            <p className='line-clamp-6 text-staleblue ~text-xs/sm'>
               {task.description}
             </p>
           )}
 
-          {/* Card footer */}
-          <div className='text-ash-200 mt-4 flex items-center justify-between text-xs font-medium'>
+          {/* Footer: Deadline and time */}
+          <div className='mt-4 flex items-center justify-between text-xs font-medium text-ash-200'>
             <p className='flex items-center gap-2'>
               <FlagIcon
                 className={cn('size-6', {
@@ -109,8 +116,10 @@ const TaskCard = ({ task, index }: { task: Task; index: number }) => {
                     task.status !== 'completed',
                 })}
               />
+              {/* Format the deadline date using date-fns */}
               <span>{format(task.deadline, 'PPP')}</span>
             </p>
+            {/* Display task time */}
             <p>{task.time}</p>
           </div>
         </article>
@@ -118,4 +127,5 @@ const TaskCard = ({ task, index }: { task: Task; index: number }) => {
     </Draggable>
   );
 };
+
 export default TaskCard;

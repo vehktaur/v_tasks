@@ -11,6 +11,7 @@ import {
 } from '../ui/select';
 import { TimeIcon } from '@/assets/svgs';
 
+// Define the props for the TimeSelect component.
 interface TimeSelectProps extends React.ComponentProps<'select'> {
   label?: string;
   name: string;
@@ -18,6 +19,8 @@ interface TimeSelectProps extends React.ComponentProps<'select'> {
   placeholder?: string;
 }
 
+// TimeSelect component: A select dropdown integrated with react-hook-form
+// that displays time options along with a time icon.
 const TimeSelect = ({
   className,
   label,
@@ -26,6 +29,7 @@ const TimeSelect = ({
   placeholder,
   ...props
 }: TimeSelectProps) => {
+  // Get register and error state from react-hook-form context.
   const {
     register,
     formState: { errors },
@@ -33,15 +37,19 @@ const TimeSelect = ({
 
   return (
     <div className='grid w-full items-start'>
+      {/* Render label if provided */}
       {label && (
         <label className='text-xs/sm mb-1.5 font-medium' htmlFor={name}>
           {label}
         </label>
       )}
+
+      {/* Connect the select component with react-hook-form using Controller */}
       <Controller
         name={name}
         render={({ field }) => (
           <Select onValueChange={field.onChange} defaultValue={field.value}>
+            {/* SelectTrigger displays the selected value and a time icon */}
             <SelectTrigger
               className={cn(
                 'input flex w-full max-w-[13.6rem] bg-transparent transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground disabled:cursor-not-allowed disabled:opacity-50',
@@ -49,23 +57,23 @@ const TimeSelect = ({
               )}
               icon={<TimeIcon />}
             >
-              {
-                <SelectValue
-                  id={name}
-                  {...register(name)}
-                  {...props}
-                  placeholder={placeholder}
-                >
-                  {field.value}
-                </SelectValue>
-              }
+              {/* SelectValue shows the current value or placeholder */}
+              <SelectValue
+                id={name}
+                {...register(name)}
+                {...props}
+                placeholder={placeholder}
+              >
+                {field.value}
+              </SelectValue>
             </SelectTrigger>
+            {/* Render dropdown list with time options */}
             <SelectContent>
               {options.map((option) => (
                 <SelectItem
-                  className='hover:bg-zinc-100'
                   key={option}
                   value={option}
+                  className='hover:bg-zinc-100'
                 >
                   {option}
                 </SelectItem>
@@ -75,6 +83,7 @@ const TimeSelect = ({
         )}
       />
 
+      {/* Display error message if field has a validation error */}
       {errors?.[name]?.message && (
         <p
           id={`${name}-error`}

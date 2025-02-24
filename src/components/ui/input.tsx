@@ -3,12 +3,16 @@
 import { cn } from '@/lib/utils';
 import { useFormContext } from 'react-hook-form';
 
+// Extend the native input props with additional properties for our component.
 interface InputProps extends React.ComponentProps<'input'> {
   label?: string;
   name: string;
 }
 
+// Input component integrated with react-hook-form.
+// It displays an optional label, an input field, and shows validation errors.
 const Input = ({ className, type, label, name, ...props }: InputProps) => {
+  // Destructure the register function and errors from the form context.
   const {
     register,
     formState: { errors },
@@ -16,11 +20,14 @@ const Input = ({ className, type, label, name, ...props }: InputProps) => {
 
   return (
     <div className='grid w-full items-start'>
+      {/* Render the label if one is provided */}
       {label && (
-        <label className='~text-xs/sm mb-1.5 font-medium' htmlFor={name}>
+        <label className='mb-1.5 font-medium ~text-xs/sm' htmlFor={name}>
           {label}
         </label>
       )}
+
+      {/* Input field with react-hook-form registration */}
       <input
         aria-labelledby={`${name}-error`}
         id={name}
@@ -33,6 +40,7 @@ const Input = ({ className, type, label, name, ...props }: InputProps) => {
         {...props}
       />
 
+      {/* Render an error message if the field has a validation error */}
       {errors?.[name]?.message && (
         <p
           id={`${name}-error`}
