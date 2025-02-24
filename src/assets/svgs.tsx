@@ -1,4 +1,4 @@
-interface SVGProps extends React.SVGProps<SVGSVGElement> {}
+type SVGProps = React.SVGProps<SVGSVGElement> & {};
 
 export const CalendarIcon = (props: SVGProps) => (
   <svg

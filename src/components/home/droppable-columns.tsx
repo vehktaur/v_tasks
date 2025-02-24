@@ -3,6 +3,7 @@
 import { DragDropContext, DropResult } from '@hello-pangea/dnd';
 import Column from '@/components/home/column';
 import { useTaskStore } from '@/stores/task-store';
+import { toast } from 'sonner';
 
 type ColumnT = {
   id: 'pending' | 'in progress' | 'completed';
@@ -30,9 +31,12 @@ const columns: ColumnT[] = [
 
 const DroppableColumns = ({ search }: { search: string }) => {
   const editTask = useTaskStore((state) => state.editTask);
+  const tasks = useTaskStore((state) => state.tasks);
 
   const onDragEnd = (result: DropResult) => {
     const { source, destination, draggableId } = result;
+
+    const task = tasks.find((task) => task.id === draggableId);
 
     if (
       !destination ||
@@ -48,6 +52,24 @@ const DroppableColumns = ({ search }: { search: string }) => {
         | 'in progress'
         | 'completed',
     });
+
+    if (
+      destination.droppableId === 'in progress' &&
+      source.droppableId !== 'in progress'
+    ) {
+      toast.info('Task in progress', {
+        description: `Name: ${task?.name}`,
+      });
+    }
+
+    if (
+      destination.droppableId === 'completed' &&
+      source.droppableId !== 'completed'
+    ) {
+      toast.success('Task completed', {
+        description: `Name: ${task?.name}`,
+      });
+    }
   };
   return (
     <DragDropContext onDragEnd={onDragEnd}>

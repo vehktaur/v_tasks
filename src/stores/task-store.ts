@@ -3,7 +3,6 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { tasks as initialTasks } from '@/lib/data';
 import { toast } from 'sonner';
-import { nanoid } from 'nanoid';
 
 export type TaskStore = {
   tasks: Task[];
@@ -16,10 +15,7 @@ export const useTaskStore = create<TaskStore>()(
     (set) => ({
       tasks: initialTasks,
 
-      addTask: (task) =>
-        set((state) => ({
-          tasks: [...state.tasks, { ...task, id: nanoid() }],
-        })),
+      addTask: (task) => set((state) => ({ tasks: [...state.tasks, task] })),
 
       editTask: (id, updatedTask) =>
         set((state) => ({

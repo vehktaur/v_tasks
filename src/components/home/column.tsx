@@ -30,9 +30,9 @@ const Column = ({ column, search }: ColumnProps) => {
   }, []);
 
   return (
-    <section className='min-h-36 w-full max-w-[22rem] overflow-visible rounded-lg bg-[#F5F7F9] pb-5 shadow-sm'>
+    <section className='min-h-36 w-full overflow-clip max-w-[22rem] rounded-xl bg-[#F5F7F9] pb-5 shadow-sm'>
       {/* Header */}
-      <header className='text-ash-200 sticky top-0 z-10 flex items-center justify-between bg-[#F5F7F9] px-2 py-2 pt-4'>
+      <header className='text-ash-200 flex items-center justify-between bg-[#F5F7F9] px-2 py-2 pt-4'>
         <h2 className='flex items-center gap-2 text-base font-medium'>
           {column.title}
           {columnTasks && columnTasks.length > 0 && (

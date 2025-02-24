@@ -8,6 +8,7 @@ import { Draggable } from '@hello-pangea/dnd';
 import { format } from 'date-fns';
 import { useTaskStore } from '@/stores/task-store';
 import FormDialog from './form-dialog';
+import Image from 'next/image';
 
 const TaskCard = ({ task, index }: { task: Task; index: number }) => {
   const deleteTask = useTaskStore((state) => state.deleteTask);
@@ -76,9 +77,23 @@ const TaskCard = ({ task, index }: { task: Task; index: number }) => {
             </Popover>
           </div>
 
+          {task.image && task.image.url && (
+            <div className='max-h-[7.8rem] mb-4 overflow-hidden rounded'>
+              <Image
+                className='size-full object-cover'
+                src={task.image.url!}
+                alt={task.image.name ?? 'An image has no name'}
+                width={1280}
+                height={720}
+              />
+            </div>
+          )}
+
           {/* Task description */}
           {task.description && (
-            <p className='text-staleblue ~text-xs/sm'>{task.description}</p>
+            <p className='text-staleblue ~text-xs/sm line-clamp-6'>
+              {task.description}
+            </p>
           )}
 
           {/* Card footer */}

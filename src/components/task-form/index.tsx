@@ -16,6 +16,8 @@ import { Button } from '@/components/ui/button';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTaskStore } from '@/stores/task-store';
 import { toast } from 'sonner';
+import { ImageFile } from '@/lib/types';
+import { useState } from 'react';
 
 type TaskFormProps = { task?: Task; closeModal: () => void };
 
@@ -25,7 +27,11 @@ const TaskForm = ({ task, closeModal }: TaskFormProps) => {
       name: task?.name ?? '',
       description: task?.description ?? '',
       priority: task?.priority,
-      image: task?.image ?? '',
+      image: {
+        url: task?.image?.url ?? '',
+        name: task?.image?.name ?? '',
+        size: task?.image?.size ?? '',
+      },
       deadline: task?.deadline ?? '',
       time: task?.time ?? '',
       status: task?.status ?? 'pending',
@@ -33,13 +39,31 @@ const TaskForm = ({ task, closeModal }: TaskFormProps) => {
     resolver: zodResolver(TaskSchema),
   });
 
-  const { handleSubmit, reset } = methods;
+  const {
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = methods;
+
+  console.log(errors);
+
+  const [image, setImage] = useState<Partial<ImageFile>>(() => ({
+    url: task?.image?.url,
+    name: task?.image?.name,
+    size: task?.image?.size,
+  }));
 
   const addTask = useTaskStore((state) => state.addTask);
   const editTask = useTaskStore((state) => state.editTask);
 
   const onSubmit = handleSubmit((data) => {
-    reset();
+    if (image) {
+      data.image = {
+        name: image.name,
+        url: image.url,
+        size: image.size,
+      };
+    }
 
     if (task?.id) {
       editTask(task.id, data);
@@ -48,11 +72,12 @@ const TaskForm = ({ task, closeModal }: TaskFormProps) => {
     }
 
     toast.success(task?.id ? 'Task update successful' : 'New task added');
+    reset();
     closeModal();
   });
   return (
     <>
-      <div className='sticky top-0 flex items-center justify-between bg-white pb-5'>
+      <div className='sticky top-0 flex items-center justify-between bg-white pb-4'>
         <h2 className={cn(sfPro.className, '~text-lg/2xl font-semibold')}>
           {task?.id ? 'Edit' : 'Add'} Task
         </h2>
@@ -93,6 +118,8 @@ const TaskForm = ({ task, closeModal }: TaskFormProps) => {
                 </>
               }
               name='image'
+              image={image}
+              setImage={setImage}
             />
 
             <div className='flex flex-col items-start justify-between gap-4 sm:flex-row'>

@@ -2,10 +2,11 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
-import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
+import { SidebarProvider } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/components/layout/app-sidebar';
 import Header from '@/components/layout/header';
 import { Toaster } from 'sonner';
+import { EdgeStoreProvider } from '@/lib/edgestore';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -25,14 +26,15 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={cn(inter.variable, 'antialiased')}>
-        <SidebarProvider>
-          <AppSidebar />
-          <div className='w-full'>
-            <Header />
-            {children}
-          </div>
-        </SidebarProvider>
-
+        <EdgeStoreProvider>
+          <SidebarProvider>
+            <AppSidebar />
+            <div className='w-full'>
+              <Header />
+              {children}
+            </div>
+          </SidebarProvider>
+        </EdgeStoreProvider>
         <Toaster closeButton position='bottom-left' />
       </body>
     </html>

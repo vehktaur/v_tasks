@@ -21,6 +21,7 @@ const Header = () => {
       </div>
 
       <Search className='ml-auto' />
+   
     </header>
   );
 };

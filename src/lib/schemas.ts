@@ -2,13 +2,19 @@ import { nanoid } from 'nanoid';
 import { z } from 'zod';
 
 export const TaskSchema = z.object({
-  id: z.string(),
+  id: z.string().default(() => nanoid()),
   name: z.string().min(1, 'Task name is required'),
   description: z.string().optional(),
   priority: z.enum(['high', 'medium', 'low'], {
     errorMap: () => ({ message: 'Priority must be high, medium, or low' }),
   }),
-  image: z.string().optional(),
+  image: z.optional(
+    z.object({
+      url: z.string().optional(),
+      name: z.string().optional(),
+      size: z.string().optional(),
+    }),
+  ),
   deadline: z
     .string()
     .or(z.date())

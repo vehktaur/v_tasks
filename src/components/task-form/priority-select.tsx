@@ -1,6 +1,6 @@
 'use client';
 
-import { cn, PriorityColors, PriorityColorsHover } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 import { Controller, useFormContext } from 'react-hook-form';
 import {
   Select,
