@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/components/layout/app-sidebar';
 import Header from '@/components/layout/header';
+import { Toaster } from 'sonner';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -31,6 +32,8 @@ export default function RootLayout({
             {children}
           </div>
         </SidebarProvider>
+
+        <Toaster closeButton position='bottom-left' />
       </body>
     </html>
   );

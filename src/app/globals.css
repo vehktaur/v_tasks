@@ -156,4 +156,8 @@
   .input {
     @apply ~py-1.5/[0.62rem] ~px-3/[0.88rem] ~text-sm/base border-ash-50 rounded-xl border outline-none focus-visible:border-[#333];
   }
+
+  .error {
+    @apply mt-1 ps-1 text-sm text-red-700;
+  }
 }

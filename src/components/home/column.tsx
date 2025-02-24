@@ -1,18 +1,11 @@
 'use client';
 
 import { PlusIcon } from '@/assets/svgs';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
-import TaskForm from '../task-form';
 import { Column as ColumnType } from '@/lib/types';
 import { Task } from '@/lib/schemas';
-import TaskCard from '../task-card';
+import TaskCard from '@/components/task-card';
 import { Droppable } from '@hello-pangea/dnd';
+import FormDialog from '@/components/form-dialog';
 
 interface ColumnProps {
   column: ColumnType;
@@ -32,15 +25,13 @@ const Column = ({ column, tasks }: ColumnProps) => {
             </span>
           )}
         </h2>
-        <Dialog>
-          <DialogTrigger className='grid size-6 place-items-center'>
-            <PlusIcon className='size-4' />
-          </DialogTrigger>
-          <DialogContent>
-            <DialogTitle className='sr-only'>Task form</DialogTitle>
-            <TaskForm />
-          </DialogContent>
-        </Dialog>
+        <FormDialog
+          trigger={
+            <button>
+              <PlusIcon className='size-4' />
+            </button>
+          }
+        />
       </header>
 
       {/* Column Content */}

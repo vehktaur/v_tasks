@@ -5,8 +5,17 @@ import { Task } from '@/lib/schemas';
 import { cn } from '@/lib/utils';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import { Draggable } from '@hello-pangea/dnd';
+import { format } from 'date-fns';
+import { useTaskStore } from '@/stores/task-store';
+import FormDialog from './form-dialog';
 
 const TaskCard = ({ task, index }: { task: Task; index: number }) => {
+  const deleteTask = useTaskStore((state) => state.deleteTask);
+
+  const handleDelete = (id: string | number) => {
+    deleteTask(id);
+  };
+
   return (
     <Draggable index={index} draggableId={task.id}>
       {(provider) => (
@@ -45,10 +54,22 @@ const TaskCard = ({ task, index }: { task: Task; index: number }) => {
                 className='grid w-auto px-0 py-1 text-xs *:px-4 *:py-1 *:text-left'
                 align='end'
               >
-                <button className='text-staleblue transition-colors duration-300 hover:bg-zinc-100'>
-                  Edit
-                </button>
-                <button className='text-[#E60C02] transition-colors duration-300 hover:bg-zinc-100'>
+                <FormDialog
+                  trigger={
+                    <button
+                      disabled={task.status === 'completed'}
+                      className='text-staleblue inline-block w-full text-left outline-none transition-colors duration-300 hover:bg-zinc-100 disabled:cursor-not-allowed disabled:hover:bg-white'
+                    >
+                      Edit
+                    </button>
+                  }
+                  task={task}
+                />
+
+                <button
+                  onClick={() => handleDelete(task.id)}
+                  className='text-[#E60C02] outline-none transition-colors duration-300 hover:bg-zinc-100'
+                >
                   Delete
                 </button>
               </PopoverContent>
@@ -66,14 +87,14 @@ const TaskCard = ({ task, index }: { task: Task; index: number }) => {
               <FlagIcon
                 className={cn('size-6', {
                   'text-[#4F9C20]': task.status === 'completed',
-                  'text-[#F76659]':
-                    Date.now() > new Date(task.deadline ?? 0).getTime() &&
-                    task.status !== 'completed',
                   'text-[#6E7C87]':
                     task.status === 'in progress' || task.status === 'pending',
+                  'text-[#F76659]':
+                    Date.now() > new Date(task.deadline).getTime() &&
+                    task.status !== 'completed',
                 })}
               />
-              <span>{task.deadline}</span>
+              <span>{format(task.deadline, 'PPP')}</span>
             </p>
             <p>{task.time}</p>
           </div>

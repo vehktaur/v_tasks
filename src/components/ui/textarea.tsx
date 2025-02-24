@@ -37,7 +37,7 @@ const Textarea = ({ className, label, name, ...props }: TextareaProps) => {
           id={`${name}-error`}
           aria-live='polite'
           aria-atomic
-          className='error mt-2 ps-1'
+          className='error'
         >
           {errors[name].message as string}
         </p>

@@ -24,7 +24,7 @@ const CoverUpload = ({
     <div className='grid w-full items-start'>
       {label && <h3 className='~text-xs/sm mb-1.5 font-medium'>{label}</h3>}
 
-      <label className='input cursor-pointer p-4 min-h-[7.8rem]'>
+      <label className='input min-h-[7.8rem] cursor-pointer p-4'>
         <div className='grid place-items-center gap-3'>
           <div className='grid size-10 place-items-center rounded-full border-[6px] border-[#F9FAFB] bg-[#F2F4F7]'>
             <UploadCloudIcon />
@@ -51,7 +51,7 @@ const CoverUpload = ({
           id={`${name}-error`}
           aria-live='polite'
           aria-atomic
-          className='error mt-2 ps-1'
+          className='error'
         >
           {errors[name].message as string}
         </p>

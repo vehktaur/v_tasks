@@ -44,7 +44,7 @@ const TimeSelect = ({
           <Select onValueChange={field.onChange} defaultValue={field.value}>
             <SelectTrigger
               className={cn(
-                'input flex w-full bg-transparent max-w-[13.6rem] transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground disabled:cursor-not-allowed disabled:opacity-50',
+                'input flex w-full max-w-[13.6rem] bg-transparent transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground disabled:cursor-not-allowed disabled:opacity-50',
                 className,
               )}
               icon={<TimeIcon />}
@@ -55,12 +55,18 @@ const TimeSelect = ({
                   {...register(name)}
                   {...props}
                   placeholder={placeholder}
-                />
+                >
+                  {field.value}
+                </SelectValue>
               }
             </SelectTrigger>
             <SelectContent>
               {options.map((option) => (
-                <SelectItem className='hover:bg-zinc-100' key={option} value={option}>
+                <SelectItem
+                  className='hover:bg-zinc-100'
+                  key={option}
+                  value={option}
+                >
                   {option}
                 </SelectItem>
               ))}
@@ -74,7 +80,7 @@ const TimeSelect = ({
           id={`${name}-error`}
           aria-live='polite'
           aria-atomic
-          className='error mt-2 ps-1'
+          className='error'
         >
           {errors[name].message as string}
         </p>

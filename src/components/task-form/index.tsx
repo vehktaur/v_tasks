@@ -14,8 +14,12 @@ import DeadlineCalendar from './deadline-calendar';
 import { timeOptions } from '@/lib/data';
 import { Button } from '../ui/button';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useTaskStore } from '@/stores/task-store';
+import { toast } from 'sonner';
 
-const TaskForm = ({ task }: { task?: Task }) => {
+type TaskFormProps = { task?: Task; closeModal: () => void };
+
+const TaskForm = ({ task, closeModal }: TaskFormProps) => {
   const methods = useForm({
     defaultValues: {
       name: task?.name ?? '',
@@ -29,14 +33,26 @@ const TaskForm = ({ task }: { task?: Task }) => {
     resolver: zodResolver(TaskSchema),
   });
 
-  const { handleSubmit } = methods;
+  const { handleSubmit, reset } = methods;
+
+  const addTask = useTaskStore((state) => state.addTask);
+  const editTask = useTaskStore((state) => state.editTask);
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    reset();
+
+    if (task?.id) {
+      editTask(task.id, data);
+    } else {
+      addTask(data);
+    }
+
+    toast.success(task?.id ? 'Task update successful' : 'New task added');
+    closeModal();
   });
   return (
     <>
-      <div className='mb-5 flex items-center justify-between'>
+      <div className='sticky top-0 flex items-center justify-between bg-white pb-5'>
         <h2 className={cn(sfPro.className, '~text-lg/2xl font-semibold')}>
           {task?.id ? 'Edit' : 'Add'} Task
         </h2>
@@ -47,7 +63,7 @@ const TaskForm = ({ task }: { task?: Task }) => {
         <form onSubmit={onSubmit}>
           <div className='space-y-4'>
             <Input
-              label='task Name'
+              label='Task Name'
               name='name'
               placeholder='Enter task name'
             />
@@ -79,7 +95,7 @@ const TaskForm = ({ task }: { task?: Task }) => {
               name='image'
             />
 
-            <div className='flex items-center justify-between gap-4'>
+            <div className='flex flex-col items-start justify-between gap-4 sm:flex-row'>
               <DeadlineCalendar
                 label='Deadline'
                 name='deadline'
@@ -95,7 +111,9 @@ const TaskForm = ({ task }: { task?: Task }) => {
             </div>
           </div>
 
-          <Button className='mt-6 w-full rounded-xl'>{task?.id ? 'Update' : 'Add'}</Button>
+          <Button type='submit' className='mt-6 w-full rounded-xl'>
+            {task?.id ? 'Update' : 'Add'}
+          </Button>
         </form>
       </FormProvider>
     </>

@@ -1,10 +1,16 @@
 'use client';
 
 import Column from '@/components/home/column';
-import { tasks } from '@/lib/placeholder-data';
-import { DragDropContext, DropResult, Droppable } from '@hello-pangea/dnd';
+import { useTaskStore } from '@/stores/task-store';
+import { DragDropContext, DropResult } from '@hello-pangea/dnd';
 
-const columns = [
+type ColumnT = {
+  id: 'pending' | 'in progress' | 'completed';
+  title: string;
+  placeholder: string;
+};
+
+const columns: ColumnT[] = [
   {
     id: 'pending',
     title: 'To do',
@@ -23,11 +29,26 @@ const columns = [
 ];
 
 export default function Home() {
-  const onDragEnd = (result: DropResult) => {
-    const { source, destination } = result;
+  const tasks = useTaskStore((state) => state.tasks);
+  const editTask = useTaskStore((state) => state.editTask);
 
-    // setActiveTasks(newActiveTasks);
-    // setCompletedTasks(newCompleteTasks);
+  const onDragEnd = (result: DropResult) => {
+    const { source, destination, draggableId } = result;
+
+    if (
+      !destination ||
+      (source.index === destination.index &&
+        source.droppableId === destination.droppableId)
+    ) {
+      return;
+    }
+
+    editTask(draggableId, {
+      status: destination.droppableId as
+        | 'pending'
+        | 'in progress'
+        | 'completed',
+    });
   };
 
   return (
