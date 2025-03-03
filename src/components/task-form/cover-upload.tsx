@@ -51,7 +51,6 @@ const CoverUpload = ({
       // Upload the image file and update progress during the process.
       const uploadedImg = await edgestore.taskCovers.upload({
         file,
-        options: { temporary: true },
         onProgressChange: (progressValue) => setProgress(progressValue),
       });
 
