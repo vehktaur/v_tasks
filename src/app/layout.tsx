@@ -14,7 +14,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Tasks | The Task Manager',
+  title: 'Tasky | The Task Manager',
   description: 'A Feature Packed Task Management Application',
 };
 
