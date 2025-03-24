@@ -53,7 +53,7 @@ export const tasks: Task[] = [
     status: 'in progress',
     image: {
       name: 'wallpaperflare.com_wallpaper (4).jpg',
-      url: 'https://files.edgestore.dev/wk1b39wmjrcujdtl/taskCovers/_public/9669b0db-9ef2-4c91-9707-698251fe1e63.jpg',
+      url: 'https://files.edgestore.dev/wk1b39wmjrcujdtl/taskCovers/_public/e69dae1b-09c6-40ca-8c23-4dcde9fa9bd1.jpg',
       size: '327377',
     },
   },
@@ -67,7 +67,7 @@ export const tasks: Task[] = [
     status: 'pending',
     image: {
       name: '039.jpg',
-      url: 'https://files.edgestore.dev/wk1b39wmjrcujdtl/taskCovers/_public/98f7f764-92af-4993-a97b-1d9998352d39.jpg',
+      url: 'https://files.edgestore.dev/wk1b39wmjrcujdtl/taskCovers/_public/0d79d871-3991-47c9-b822-137e3a0c062c.jpg',
       size: '329625',
     },
   },
